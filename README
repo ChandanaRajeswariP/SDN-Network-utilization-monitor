@@ -93,7 +93,7 @@ HOW TO RUN
 cd pox
 python3 pox.py forwarding.l2_learning monitor
 ```
- 2. Run Mininet
+2. Run Mininet
 
 ```
 sudo mn --topo single,3 --controller remote,ip=127.0.0.1,port=6633 --mac
