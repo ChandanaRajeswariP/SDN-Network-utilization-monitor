@@ -78,7 +78,9 @@ SDN-Bandwidth-Monitor/
 │
 ├── monitor.py        # POX controller module
 ├── run.sh            # Automation script
+├── SDN_report        # Project report
 └── README.md
+
 ```
 
 ---
