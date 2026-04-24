@@ -1,2 +1,166 @@
-This directory is not under version control, so it makes a good place to
-put your own projects.
+# SDN-Based Network Utilization Monitor (Using POX)
+
+## Overview
+
+This project implements a Software Defined Networking (SDN) based solution to monitor real-time bandwidth utilization across a network.
+It uses the POX controller and Mininet emulator to collect port statistics and compute bandwidth dynamically.
+
+---
+
+## Problem Statement
+
+To design and implement a system that:
+
+* Collects byte counters from network switches
+* Estimates bandwidth usage
+* Displays utilization
+* Updates periodically in real-time
+
+---
+
+## Architecture
+
+The project follows the SDN architecture:
+
+* Application Layer – Monitoring logic
+* Control Layer – POX Controller
+* Data Plane – OpenFlow switches (Mininet)
+
+The controller communicates with switches using the OpenFlow protocol.
+
+---
+
+## Topology (Mininet)
+
+* 3 Hosts: h1, h2, h3
+* 1 Switch: s1
+* Remote Controller: POX
+
+---
+
+## Technologies Used
+
+* Python
+* POX Controller
+* Mininet
+* OpenFlow Protocol
+* Linux (Ubuntu)
+
+---
+
+## Features
+
+* Real-time bandwidth monitoring
+* Periodic updates (every 5 seconds)
+* Collects port statistics from switches
+* Calculates bandwidth using byte counters
+* Displays per-port utilization
+
+---
+
+## Working Principle
+
+1. Controller sends Port Statistics Request
+
+2. Switch responds with byte counters
+
+3. Bandwidth is calculated using:
+
+   Bandwidth (bps) = (Current Bytes − Previous Bytes) × 8 / Time Interval
+
+4. Results are displayed per port
+
+---
+
+## Project Structure
+
+```
+SDN-Bandwidth-Monitor/
+│
+├── monitor.py        # POX controller module
+├── run.sh            # Automation script
+├── report.docx       # Project report
+├── screenshots/      # Demo outputs
+└── README.md
+```
+
+---
+
+## How to Run
+
+### 1. Start POX Controller
+
+```
+cd pox
+python3 pox.py forwarding.l2_learning monitor
+```
+
+### 2. Run Mininet
+
+```
+sudo mn --topo single,3 --controller remote,ip=127.0.0.1,port=6633 --mac
+```
+
+### 3. Test the System
+
+Ping test:
+
+```
+h1 ping -c 5 h2
+```
+
+High traffic test:
+
+```
+iperf h1 h2
+```
+
+---
+
+## Sample Output
+
+```
+--- Switch 00-00-00-00-00-01 Bandwidth Report ---
+Port | Rx (bps) | Tx (bps) | Total Bytes
+1    | 1024.00  | 2048.00  | 123456
+2    | 0.00     | 0.00     | 7890
+3    | 0.00     | 0.00     | 7890
+
+---
+
+## Requirements
+
+* Mininet installed
+* POX controller setup
+* Python 3
+
+---
+
+## Notes
+
+* Place monitor.py inside pox/ext/ directory
+* Ensure POX is running before starting Mininet
+
+---
+
+## Conclusion
+
+* Successfully implemented real-time bandwidth monitoring
+* Demonstrated SDN advantages like centralized control
+* System is scalable and can be extended for traffic analysis, congestion detection, and network optimization
+
+---
+
+## Future Enhancements
+
+* Live bandwidth graph (Matplotlib)
+* Web dashboard (Flask)
+* Alert system for high traffic
+
+---
+
+## Author
+
+CHANDANA RAJESWARI P
+
+
